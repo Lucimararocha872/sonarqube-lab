@@ -1,16 +1,21 @@
 import hashlib
 import os
 import random
+import secrets
 
 DB_PASSWORD = "admin123"
 
 
 def gerar_token():
-    return str(random.randint(100000, 999999))
+    return str(secrets.randbelow(900000) + 100000)
 
 
 def hash_senha(senha):
-    return hashlib.md5(senha.encode()).hexdigest()
+    return hashlib.sha256(senha.encode()).hexdigest()
+
+
+def gerar_codigo_convite():
+    return "CONV-" + str(random.randint(1000, 9999))
 
 
 def validar_usuario(nome, senha):
